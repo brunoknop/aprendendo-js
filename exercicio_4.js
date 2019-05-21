@@ -1,50 +1,35 @@
-const matriz1 = [[1,2,3],
-                [5,6,7],
-                [9,0,1]];
-//const novaMatriz = matriz.map(zeraColuna)
-// function zeraColuna (elemento){
-//     let index=0;
-//     let item=0;
-//     for (let contador1 = 0; contador1 < matriz[index].length; contador1++) {
-//         if (matriz[index][contador1] == 0) {
-//             for (let contador2 = 0; contador2 < array[index].length; contador2++) {
-//                 novaMatriz= 0;
-//             }
-//         }index++
-//     }
-// }
-
-// [[1,2,3,4],  [[1,0,3,4],
-//  [5,6,7,8],   [5,0,7,8],
-//  [9,0,1,2]];  [0,0,0,0]];
+const matriz1 = [[1,2,3,7,5],
+                [5,6,7,0,9],
+                [9,0,1,4,8],
+                [7,2,3,7,6],
+                [1,2,8,7,5]];
 
 function indentificaZeroMatriz(matriz) {
-    let colunaZero = 0;
-    let linhaZero = 0;
+    let coordenadasZeros = [];
     for (let indiceLinha = 0; indiceLinha < matriz.length; indiceLinha++){
         for (let indiceValor = 0; indiceValor < matriz[indiceLinha].length; indiceValor ++) {
             if (matriz[indiceLinha][indiceValor] === 0) {
-                flag = zeraColuna(matriz,indiceLinha, indiceValor);
-                colunaZero = indiceValor;
-                linhaZero = indiceLinha;
+                coordenadasZeros.push([indiceLinha, indiceValor]);
             }
         }
     }
-    flag = zeraLinha(matriz,linhaZero, colunaZero);
+    zeraColuna(matriz, coordenadasZeros);
+    zeraLinha(matriz, coordenadasZeros);
 }
 
-function zeraColuna(matriz, linha, coluna) {
-    for (let indiceLinha = 0; indiceLinha < matriz.length; indiceLinha++){
-        matriz[indiceLinha][coluna] = 0;
+function zeraColuna(matriz, coordenadas) {
+    for (let zeroEncontrado = 0; zeroEncontrado < coordenadas.length; zeroEncontrado++){
+        for (let linha = 0; linha < matriz.length; linha++){
+            matriz[linha][coordenadas[zeroEncontrado][1]] = 0;
+        }
     }
 }
-function zeraLinha(matriz, linha, coluna) {
-    for (let indiceValor = 0; indiceValor < matriz[linha].length; indiceValor ++) {
-        matriz[linha][indiceValor] = 0;
+function zeraLinha(matriz, coordenadas) {
+    for (let zeroEncontrado = 0; zeroEncontrado < coordenadas.length; zeroEncontrado++){
+        for (let coluna = 0; coluna < matriz[zeroEncontrado].length; coluna++){
+            matriz[coordenadas[zeroEncontrado][0]][coluna] = 0;
+        }
     }
 }
-
-
 indentificaZeroMatriz(matriz1);
-
-console.log (matriz1)
+console.log(matriz1);
