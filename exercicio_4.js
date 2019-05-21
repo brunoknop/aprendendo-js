@@ -1,8 +1,8 @@
-const matriz = [[1,2,3],
+const matriz1 = [[1,2,3],
                 [5,6,7],
                 [9,0,1]];
-//const novaMatriz = matriz.map(zeraMatriz)
-// function zeraMatriz (elemento){
+//const novaMatriz = matriz.map(zeraColuna)
+// function zeraColuna (elemento){
 //     let index=0;
 //     let item=0;
 //     for (let contador1 = 0; contador1 < matriz[index].length; contador1++) {
@@ -19,25 +19,32 @@ const matriz = [[1,2,3],
 //  [9,0,1,2]];  [0,0,0,0]];
 
 function indentificaZeroMatriz(matriz) {
+    let colunaZero = 0;
+    let linhaZero = 0;
     for (let indiceLinha = 0; indiceLinha < matriz.length; indiceLinha++){
         for (let indiceValor = 0; indiceValor < matriz[indiceLinha].length; indiceValor ++) {
             if (matriz[indiceLinha][indiceValor] === 0) {
-                flag = zeraMatriz(matriz,indiceLinha, indiceValor);
+                flag = zeraColuna(matriz,indiceLinha, indiceValor);
+                colunaZero = indiceValor;
+                linhaZero = indiceLinha;
             }
         }
     }
+    flag = zeraLinha(matriz,linhaZero, colunaZero);
 }
 
-function zeraMatriz(matriz, linha, coluna) {
-    // Zerar toda coluna
+function zeraColuna(matriz, linha, coluna) {
     for (let indiceLinha = 0; indiceLinha < matriz.length; indiceLinha++){
         matriz[indiceLinha][coluna] = 0;
     }
-    // Zerar toda linha
+}
+function zeraLinha(matriz, linha, coluna) {
     for (let indiceValor = 0; indiceValor < matriz[linha].length; indiceValor ++) {
         matriz[linha][indiceValor] = 0;
     }
 }
 
 
-indentificaZeroMatriz(matriz);
+indentificaZeroMatriz(matriz1);
+
+console.log (matriz1)
