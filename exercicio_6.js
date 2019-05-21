@@ -1,33 +1,37 @@
-const funcionarios = [10,20,30,50];
-const sobeEDesce = 1 * 2;
-const tempoPorAndar = funcionarios.map(
-    function calculaTempo(pessoas, andar) {
-        let tempo = 0;
-        for (let contador = 0; contador < funcionarios.length; contador++) {
-            if (andar>contador) {
-                tempo = tempo+funcionarios[contador]*((andar-contador)*sobeEDesce);
-            }
-            if (andar<contador){
-                tempo = tempo+funcionarios[contador]*((contador-andar)*sobeEDesce);
-            }
-        }
-    return tempo
-    });
+const funcionariosPorAndar = [10, 10, 2];
 
-let index = 0;
-let contador = 0;
-while(contador<tempoPorAndar.length) {
-    if (tempoPorAndar[contador]<tempoPorAndar[index]) {
-        index=contador;
+const tempoEntreAcoes = 1;
+
+const sobeEDesce = tempoEntreAcoes * 2;
+
+const tempoPorAndar = funcionariosPorAndar.map(calculaTempo);
+const menorTempoCalculado = identificaMenorTempo(tempoPorAndar);
+
+console.log('o melhor andar é o', menorTempoCalculado + 1, 'e ele tem o tempo de', tempoPorAndar[menorTempoCalculado], 'minutos')
+console.log(tempoPorAndar)
+
+function calculaTempo(numeroPessoasPorAndar, andar) {
+    let tempo = 0;
+    for (let contador = 0; contador < funcionariosPorAndar.length; contador++) {
+        if (andar > contador) {
+            tempo = tempo + funcionariosPorAndar[contador] * ((andar - contador) * sobeEDesce);
+        }
+        if (andar < contador) {
+            tempo = tempo + funcionariosPorAndar[contador] * ((contador - andar) * sobeEDesce);
+        }
     }
-    else{
-        contador++;
-    }
-    if (index==tempoPorAndar.length){
-        break;
-    }
+    return tempo;
 }
 
-console.log(index)
-console.log(tempoPorAndar)
-console.log('o melhor andar é o',index+1,'e ele tem o tempo de',tempoPorAndar[index],'minutos')
+function identificaMenorTempo(tempoPorAndar) {
+    let index = 0;
+    let contador = 0;
+    while (contador < tempoPorAndar.length) {
+        if (tempoPorAndar[contador] < tempoPorAndar[index]) {
+            index = contador;
+        } else {
+            contador++;
+        }
+    }
+    return index;
+}
