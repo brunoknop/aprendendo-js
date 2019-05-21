@@ -1,21 +1,33 @@
-const andar1 = 10;
-const andar2 = 20;
-const andar3 = 30;
-const tempoPorAndar = 1;
-const tempoAndar1 = (andar3*(4*tempoPorAndar))+(andar2*(2*tempoPorAndar))
-const tempoAndar2 = (andar1*(2*tempoPorAndar))+(andar3*(2*tempoPorAndar))
-const tempoAndar3 = (andar1*(4*tempoPorAndar))+(andar2*(2*tempoPorAndar))
+const funcionarios = [10,20,30,50];
+const sobeEDesce = 1 * 2;
+const tempoPorAndar = funcionarios.map(
+    function calculaTempo(pessoas, andar) {
+        let tempo = 0;
+        for (let contador = 0; contador < funcionarios.length; contador++) {
+            if (andar>contador) {
+                tempo = tempo+funcionarios[contador]*((andar-contador)*sobeEDesce);
+            }
+            if (andar<contador){
+                tempo = tempo+funcionarios[contador]*((contador-andar)*sobeEDesce);
+            }
+        }
+    return tempo
+    });
 
-console.log(tempoAndar1)
-console.log(tempoAndar2)
-console.log(tempoAndar3)
+let index = 0;
+let contador = 0;
+while(contador<tempoPorAndar.length) {
+    if (tempoPorAndar[contador]<tempoPorAndar[index]) {
+        index=contador;
+    }
+    else{
+        contador++;
+    }
+    if (index==tempoPorAndar.length){
+        break;
+    }
+}
 
-if(tempoAndar1<tempoAndar2 && tempoAndar1<tempoAndar3){
-    console.log('eh melhor instalar no primeiro andar, onde o melhor tempo eh de ',tempoAndar1,' segundos.')
-}
-if(tempoAndar2<=tempoAndar1 && tempoAndar2<=tempoAndar3){
-    console.log('eh melhor instalar no segundo andar, onde o melhor tempo eh de ',tempoAndar2,' segundos.')
-}
-if(tempoAndar3<tempoAndar1 && tempoAndar3<tempoAndar2){
-    console.log('eh melhor instalar no terceiro andar, onde o melhor tempo eh de ',tempoAndar3,' segundos.')
-}
+console.log(index)
+console.log(tempoPorAndar)
+console.log('o melhor andar é o',index+1,'e ele tem o tempo de',tempoPorAndar[index],'minutos')
